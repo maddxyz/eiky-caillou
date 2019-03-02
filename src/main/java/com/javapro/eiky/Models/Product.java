@@ -116,8 +116,8 @@ public class Product {
         return this.negatifScore() - this.positifScore();
     }
 
-    private String getQualities(){
-        String s = "Les qualités de " + this.product_name + " sont : ";
+    public String getQualities(){
+        String s = "";
         if (nutriments.energyScore() <= 3 ) s = s + "Densité énergétique (" + nutriments.energyScore() + ")," ;
         if (nutriments.saturatedFatScore() <= 3 ) s = s + " Graisses saturées (" + nutriments.saturatedFatScore() + ")," ;
         if (nutriments.saltScore() <= 3 ) s = s + " Sodium1 (" + nutriments.saltScore() + ")," ;
@@ -127,8 +127,8 @@ public class Product {
         return s;
     }
 
-    private String getFlaws(){
-        String s = "Les défauts de " + this.product_name + " sont : ";
+    public String getFlaws(){
+        String s = "";
         if (nutriments.energyScore() >= 7 ) s = s + "Densité énergétique (" + nutriments.energyScore() + ")," ;
         if (nutriments.saturatedFatScore() >= 7 ) s = s + " Graisses saturées (" + nutriments.saturatedFatScore() + "),";
         if (nutriments.saltScore() >= 7 ) s = s + " Sodium1 (" + nutriments.saltScore() + ")," ;

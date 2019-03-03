@@ -23,10 +23,15 @@ public class Product {
     private String product_name;
     private String no_nutrition_data;
     private String nutrition_data;
+    private long nutritional_score;
+    private String qualities;
+    private String flaws;
 
 
     // Getter Methods
-
+public long getNutritional_score() {
+    return this.nutritional_score;
+}
 
     public String getNutrition_grade_fr() {
         return nutrition_grade_fr;
@@ -116,7 +121,7 @@ public class Product {
         return this.negatifScore() - this.positifScore();
     }
 
-    public String getQualities(){
+    public void determineQualities(){
         String s = "";
         if (nutriments.energyScore() <= 3 ) s = s + "Densité énergétique (" + nutriments.energyScore() + ")," ;
         if (nutriments.saturatedFatScore() <= 3 ) s = s + " Graisses saturées (" + nutriments.saturatedFatScore() + ")," ;
@@ -124,10 +129,19 @@ public class Product {
         if (nutriments.sugarScore() <= 3 ) s = s + " Sucres simples (" + nutriments.sugarScore() + ")," ;
         if (nutriments.fibersScore() >= 2 ) s = s + " Fibres (" + nutriments.fibersScore() + ")," ;
         if (nutriments.proteinsScore() >= 2 ) s = s + " Proteins (" + nutriments.proteinsScore() + "),";
-        return s;
+        this.qualities = s;
     }
 
+    public String getQualities(){
+        return this.qualities;
+    }
+
+
     public String getFlaws(){
+        return this.flaws;
+    }
+
+    public void determineFlaws(){
         String s = "";
         if (nutriments.energyScore() >= 7 ) s = s + "Densité énergétique (" + nutriments.energyScore() + ")," ;
         if (nutriments.saturatedFatScore() >= 7 ) s = s + " Graisses saturées (" + nutriments.saturatedFatScore() + "),";
@@ -135,20 +149,11 @@ public class Product {
         if (nutriments.sugarScore() >= 7 ) s = s + " Sucres simples (" + nutriments.sugarScore() + ")," ;
         if (nutriments.fibersScore() <= 0 ) s = s + " Fibres (" + nutriments.fibersScore() + ")," ;
         if (nutriments.proteinsScore() <= 0 ) s = s + " Proteins (" + nutriments.proteinsScore() + "),";
-        return s;
+        this.flaws =  s;
     }
 
-    public String Synthesis(){
-        String ret = "";
-        String qstart = "Les qualités de" + this.product_name + " sont : ";
-        String fstart = "Les défauts de" + this.product_name + " sont : ";
-        if (getQualities().length() != qstart.length()){
-            ret = ret + "<br>" + getQualities();
-        }
-        if (getFlaws().length() != fstart.length()){
-            ret = ret + "<br>" + getFlaws();
-        }
-        return ret;
+    public void calculateNutritionalScore(){
+        this.nutritional_score = this.nutritionalScore();
     }
 
 }

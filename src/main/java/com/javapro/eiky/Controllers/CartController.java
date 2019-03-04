@@ -65,7 +65,7 @@ public class CartController {
     }
 
     @DeleteMapping("/cart/{id}/product/{pid}")
-    private void deleteProduct(@PathVariable("id") Long id, @PathVariable("pid") String pid) {
+    private void deleteProduct(@PathVariable("id") Long id, @PathVariable("pid") Long pid) {
         Cart c = cartService.getCart(id);
         productService.deleteProduct(pid);
     }

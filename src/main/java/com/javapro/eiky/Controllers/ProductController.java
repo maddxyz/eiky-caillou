@@ -1,44 +1,39 @@
 package com.javapro.eiky.Controllers;
 
 import com.javapro.eiky.APIClient;
-import com.javapro.eiky.Models.Barcode;
-import com.javapro.eiky.Models.Product;
-import com.javapro.eiky.Models.ProductScoreDTO;
-import com.javapro.eiky.Models.ProductSynthesisDTO;
+import com.javapro.eiky.Models.product.Product;
+import com.javapro.eiky.Models.product.ProductScoreDTO;
+import com.javapro.eiky.Models.product.ProductSynthesisDTO;
+import com.javapro.eiky.Services.ProductService;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-
 
 
 @RestController
 public class ProductController {
 
-    private final APIClient apiClient;
+    private final ProductService productService;
 
-    public ProductController(APIClient apiClient) {
-        this.apiClient = apiClient;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+//    @Bean
+//    public ModelMapper modelMapper() {
+//        return new ModelMapper();
+//    }
 
     @GetMapping("/product/{barcode}")
-    public Barcode fetchProduct(@PathVariable String barcode) {
-        return this.apiClient.fetchProduct(barcode);
+    public Product fetchProduct(@PathVariable String barcode) {
+        return productService.getProduct(barcode);
     }
 
     @GetMapping("/product/{barcode}/score")
     public ProductScoreDTO fetchProductNutritionalScore(@PathVariable String barcode) {
-        Product p = this.apiClient.fetchProduct(barcode).getProduct();
+        Product p = productService.getProduct(barcode);
         p.calculateNutritionalScore();
         ModelMapper modelMapper = new ModelMapper();
         ProductScoreDTO pdto = modelMapper.map(p, ProductScoreDTO.class);
@@ -47,11 +42,17 @@ public class ProductController {
 
     @GetMapping("/product/{barcode}/synthesis")
     public ProductSynthesisDTO fetchProductSynthesis(@PathVariable String barcode) {
-        Product p = this.apiClient.fetchProduct(barcode).getProduct();
+        Product p = productService.getProduct(barcode);
         p.determineFlaws();
         p.determineQualities();
         ModelMapper modelMapper = new ModelMapper();
         ProductSynthesisDTO pdto = modelMapper.map(p, ProductSynthesisDTO.class);
         return pdto;
+    }
+
+    @PostMapping("product/{barcode}/save")
+    private Product saveProduct(@PathVariable("barcode") String barcode) {
+        Product p = productService.getProduct(barcode);
+        return productService.saveProduct(p);
     }
 }

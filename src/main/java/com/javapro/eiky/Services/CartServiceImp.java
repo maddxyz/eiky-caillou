@@ -1,8 +1,10 @@
 package com.javapro.eiky.Services;
 
-import com.javapro.eiky.Models.Cart;
-import com.javapro.eiky.Models.CartRepository;
+import com.javapro.eiky.Models.cart.Cart;
+import com.javapro.eiky.Models.cart.CartRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CartServiceImp implements CartService{
     private CartRepository cartRepository;
 

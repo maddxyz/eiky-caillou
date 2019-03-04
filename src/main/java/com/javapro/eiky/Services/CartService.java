@@ -1,6 +1,6 @@
 package com.javapro.eiky.Services;
 
-import com.javapro.eiky.Models.Cart;
+import com.javapro.eiky.Models.cart.Cart;
 
 public interface CartService {
     public abstract Cart getCart(Long id);

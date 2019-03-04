@@ -1,13 +1,9 @@
 package com.javapro.eiky;
 
-import com.javapro.eiky.Models.*;
+import com.javapro.eiky.Models.others.Barcode;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
-
-import javax.xml.ws.Response;
 
 @Component
 public class APIClient {

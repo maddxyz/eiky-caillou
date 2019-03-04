@@ -1,6 +1,6 @@
 package com.javapro.eiky.Services;
 
-import com.javapro.eiky.Models.Product;
+import com.javapro.eiky.Models.product.Product;
 
 public interface ProductService {
     public abstract Product getProduct(String id);

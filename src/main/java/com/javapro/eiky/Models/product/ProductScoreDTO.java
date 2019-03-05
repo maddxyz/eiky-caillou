@@ -8,4 +8,6 @@ public class ProductScoreDTO {
     private String code;
     private String product_name;
     private long nutritional_score;
+    private String color;
+    private String classe;
 }

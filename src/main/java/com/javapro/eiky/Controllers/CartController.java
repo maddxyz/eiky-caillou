@@ -80,7 +80,7 @@ public class CartController {
 //            sum += this.apiClient.fetchProduct(barcode).getProduct().nutritionalScore();
 //        }
         for (Product product : c.getInProducts()){
-            sum += product.nutritionalScore();
+            sum += product.getNutritional_score();
         }
         cdto.setNutritional_score(sum);
 

@@ -34,7 +34,7 @@ public class ProductController {
     @GetMapping("/product/{barcode}/score")
     public ProductScoreDTO fetchProductNutritionalScore(@PathVariable String barcode) {
         Product p = productService.getProduct(barcode);
-        p.calculateNutritionalScore();
+        p.getNutritional_score();
         ModelMapper modelMapper = new ModelMapper();
         ProductScoreDTO pdto = modelMapper.map(p, ProductScoreDTO.class);
         return pdto;

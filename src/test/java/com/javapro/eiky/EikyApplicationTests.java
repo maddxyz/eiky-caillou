@@ -7,10 +7,12 @@ import com.javapro.eiky.Models.others.Barcode;
 import com.javapro.eiky.Models.others.Nutriments;
 import com.javapro.eiky.Models.product.Product;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertNotNull;
@@ -19,7 +21,8 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class EikyApplicationTests {
-
+    @Rule
+    public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("./generated-snippets");
     @Autowired
     private APIClient apiClient;
     private Barcode barcode;
